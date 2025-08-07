@@ -1,7 +1,12 @@
 /vendor/
 /node_modules/
-/tests/
 /phpunit.xml
 /.idea/
 /.DS_Store
 *.log
+.phpunit.result.cache
+.env
+.env.*
+/dist/
+/build/
+/tmp/
