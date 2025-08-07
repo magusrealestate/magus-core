@@ -1,0 +1,37 @@
+name: PHPUnit
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer, phpunit
+
+      - name: Install Composer dependencies
+        run: composer install
+        working-directory: ./wp-content/plugins/magus-core
+
+      - name: Show working directory
+        run: pwd
+        working-directory: ./wp-content/plugins/magus-core
+
+      - name: List files in plugin dir
+        run: ls -lah
+        working-directory: ./wp-content/plugins/magus-core
+
+      - name: Run PHPUnit tests
+        run: vendor/bin/phpunit --testdox --configuration=phpunit.xml
+        working-directory: ./wp-content/plugins/magus-core
